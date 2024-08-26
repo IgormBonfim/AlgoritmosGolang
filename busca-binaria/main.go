@@ -1,12 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-
-	array := []int{1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-
-	position, err := buscaBinaria(array, 10);
+	array := createArray(240000)
+	
+	position, err := buscaBinaria(array, 1);
 
 	if err != nil {
 		fmt.Println(err.Error());
@@ -23,7 +24,7 @@ func buscaBinaria(list []int, target int) (int, error) {
 		temp := list[half];
 
 		fmt.Println("Buscando no indice: \n", half)
-		
+
 		if temp == target {
 			return half, nil;
 		}
@@ -35,4 +36,15 @@ func buscaBinaria(list []int, target int) (int, error) {
 		}
 	}
 	return -1, NewError("Número não encontrado no array")
+}
+
+func createArray(width int) []int {
+
+	array := make([]int, width);
+
+	for i := 0; i < width; i++ {
+		array[i] = i+1;
+	}
+
+	return array
 }
