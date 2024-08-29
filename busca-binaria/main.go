@@ -5,47 +5,48 @@ import (
 )
 
 func main() {
-	array := createArray(1024)
+	array := createArray(10)
 
 	position, count, err := buscaBinaria(array, 1024)
 
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println(err.Error());
+		return;
 	}
 	fmt.Printf("Número encontrado na posição: %d em %d iterações\n", position, count)
-}
+}	
 
-func buscaBinaria(list []int, target int) (int, int, error) {
-	low := 0
-	high := len(list) - 1
-	count := 0
+func buscaBinaria(array []int, target int) (int, int, error) { // funcao recebe um array e o numero alvo e retorna o indice, o numero de tentativa, e um possivel erro
+	low := 0; // Inicializa variavel low e atribui o valor 0 (indice minimo de um array)
+	high := len(array) - 1; // Inicializa variavel high e atribui o valor do tamanho do array - 1 (indice maximo de um array)
+	count := 0; // Inicializa e atribui a variavel do contador
 
-	for low <= high {
-		mid := (low + high) / 2
-		temp := list[mid]
+	for low <= high { // enquanto a variavel low for menor ou igual a variavel high executa esse bloco em loop
+		count++; //incrementa variavel do contador
 
-		fmt.Printf("Buscando no indice: %d \n", mid)
+		mid := (low + high) / 2; // inicializa e atribui a variavel de palpite (mid) calculando a soma do indice minimo com o indice maximo e dividindo por 2 
+		value := array[mid]; // inicializa e atribui a variavel value com o valor do array no indice do palpite
 
-		if temp == target {
-			return mid, count, nil
+		fmt.Printf("Tentativa %d: buscando no índice: %d \n", count, mid); // Imprime no console a mensagem de tentativa
+
+		if value == target { // compara valor com numero alvo
+			return mid, count, nil;  // caso o valor naquele indice seja o numero alvo, retorna o indice, numero de tentative, e nao retorna um erro
 		}
-		
-		count++
 
-		if temp > target {
-			high = mid - 1
-		} else {
-			low = mid + 1
+		if value > target { // verifica se o valor e maior que o numero alvo
+			high = mid - 1; // caso o valor seja maior atualiza a variavel high para o indice anterior ao indice do palpite
+		} else { // se o valor nao for maior que o numero alvo executa a linha abaixo
+			low = mid + 1; // caso o valor seja menor atualiza a variavel low para o proximo indice depois do indice de palpite
 		}
 	}
-	return -1, count, NewError("Número não encontrado no array")
+	return -1, count, fmt.Errorf("número não encontrado no array"); // Caso o numero alvo nao esteja no array, retorna o indice -1, o numero de tentativas, e retorna um erro
 }
 
-func createArray(width int) []int {
+func createArray(size int) []int {
 
-	array := make([]int, width)
+	array := make([]int, size)
 
-	for i := 0; i < width; i++ {
+	for i := 0; i < size; i++ {
 		array[i] = i + 1
 	}
 
