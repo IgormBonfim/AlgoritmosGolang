@@ -20,20 +20,23 @@ func quicksort(array []int) []int {
 		return array
 	}
 
-	pivo := array[0]
+	pivo := array[len(array)/2]
 	var menores []int
 	var maiores []int
+	var iguais []int
 
-	for _, value := range array[1:] {
-		if value <= pivo {
+	for _, value := range array {
+		if value < pivo {
 			menores = append(menores, value)
-		} else {
+		} else if value > pivo {
 			maiores = append(maiores, value)
+		} else {
+			iguais = append(iguais, value)
 		}
 	}
 	fmt.Printf("Ordenando, menores: %d, pivo: %d, maiores: %d \n", menores, pivo, maiores)
 
-	return append(quicksort(menores), append([]int{pivo}, quicksort(maiores)...)...)
+	return append(quicksort(menores), append(iguais, quicksort(maiores)...)...)
 }
 
 func createArray(width int) []int {
