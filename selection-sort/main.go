@@ -13,14 +13,14 @@ func main() {
 	arrayOrdenado := make([]int, len(array))
 
 	for i := range array {
-		menor := buscaMenor(array);
+		menor := selectionSort(array);
 		arrayOrdenado[i] = array[menor];
 		array = remove(array, menor);
 	}
 	fmt.Printf("Array ordenado: %d \n", arrayOrdenado)
 }
 
-func buscaMenor(array []int) int {
+func selectionSort(array []int) int {
 
 	menor := array[0];
 	indiceMenor := 0;
