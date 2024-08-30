@@ -18,11 +18,11 @@ func soma(array []int) int {
 		return array[0]
 	}
 
-	proximoArray := array[1:]
+	arrayRestante := array[1:]
 
-	fmt.Printf("Somando: %d com %d \n", array[0], proximoArray)
+	fmt.Printf("Somando: %d com %d \n", array[0], arrayRestante)
 
-	return array[0] + soma(proximoArray)
+	return array[0] + soma(arrayRestante)
 }
 
 func createArray(size int) []int {
