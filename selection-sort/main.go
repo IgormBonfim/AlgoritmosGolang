@@ -6,33 +6,33 @@ import (
 )
 
 func main() {
-	array := createArray(15);
+	array := createArray(5)
 
 	fmt.Printf("Array não ordenado: %d \n", array)
 
 	arrayOrdenado := make([]int, len(array))
 
 	for i := range array {
-		menor := selectionSort(array);
-		arrayOrdenado[i] = array[menor];
-		array = remove(array, menor);
+		menor := selectionSort(array)
+		arrayOrdenado[i] = array[menor]
+		array = remove(array, menor)
 	}
 	fmt.Printf("Array ordenado: %d \n", arrayOrdenado)
 }
 
 func selectionSort(array []int) int {
 
-	menor := array[0];
-	indiceMenor := 0;
+	menor := array[0]
+	indiceMenor := 0
 
 	for i := 1; i < len(array); i++ {
 		if array[i] < menor {
-			menor = array[i];
-			indiceMenor = i;
+			menor = array[i]
+			indiceMenor = i
 		}
 	}
 
-	return indiceMenor;
+	return indiceMenor
 }
 
 func remove(arr []int, index int) []int {
