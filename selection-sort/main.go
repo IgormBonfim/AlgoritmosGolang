@@ -10,17 +10,24 @@ func main() {
 
 	fmt.Printf("Array não ordenado: %d \n", array)
 
-	arrayOrdenado := make([]int, len(array))
+	arrayOrdenado := selectionSort(array);
 
-	for i := range array {
-		menor := selectionSort(array)
-		arrayOrdenado[i] = array[menor]
-		array = remove(array, menor)
-	}
 	fmt.Printf("Array ordenado: %d \n", arrayOrdenado)
 }
 
-func selectionSort(array []int) int {
+func selectionSort(array []int) []int {
+	arrayOrdenado := make([]int, len(array))
+
+	for i := range array {
+		menor := menorValor(array)
+		arrayOrdenado[i] = array[menor]
+		array = remove(array, menor)
+	}
+
+	return arrayOrdenado
+}
+
+func menorValor(array []int) int {
 
 	menor := array[0]
 	indiceMenor := 0
